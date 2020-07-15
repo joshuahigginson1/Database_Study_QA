@@ -1,4 +1,4 @@
-/* An SQL script to create a new table within my shop database */
+/* An SQL script to create new tables within my shop database. */
 
 CREATE DATABASE IF NOT EXISTS shop_example;
 
@@ -33,18 +33,15 @@ CREATE TABLE IF NOT EXISTS order_table (
   order_date date NOT NULL,
   payment_info varchar(1000) DEFAULT 'Awaiting Payment Info...' NOT NULL,
   shipping_info varchar(1000) DEFAULT 'Order Not Shipped...' NOT NULL,
-  PRIMARY KEY(order_id),
+  PRIMARY KEY(order_id)
 );
 
-/* Creates an order line table in order to resolve m:m link between stock and order. */
+/* Creates an order line table in order to resolve m:m link between stock
+and order. FKeys are then added later on within the fix.sql file. */
 
 CREATE TABLE IF NOT EXISTS order_line (
-  orderline_id int UNIQUE AUTO_INCREMENT,
-  fk_stock_id int,
-  fk_order_id int,
+  orderline_id int AUTO_INCREMENT,
   order_quantity int NOT NULL,
   order_subtotal int NOT NULL,
-  PRIMARY KEY(orderline_id),
-  FOREIGN KEY(fk_stock_id) REFERENCES stock_table(stock_id),
-  FOREIGN KEY(fk_order_id) REFERENCES order_table(order_id)
+  PRIMARY KEY(orderline_id)
 );
