@@ -13,8 +13,8 @@ INSERT into stock_table (stock_name, stock_quantity, stock_price, stock_warehous
 INSERT into order_table (order_date)
   VALUES (2010-11-12), (2010-12-12), (2011-01-01);
 
-INSERT into order_line (order_quantity)
-  VALUES (4), (1), (2);
+INSERT into order_line (order_quantity, order_subtotal)
+  VALUES (4,20), (1,40), (2,60);
 
 /* Deleting entry from customers, and one from orders..
 
