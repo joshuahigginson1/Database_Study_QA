@@ -394,10 +394,12 @@ ORDER BY country ASC;
 
 Return the full names (first and last) of actors with “son” in their last name, ordered by their first name.
 
-SELECT
-FROM 
-WHERE name LIKE "%son%"
-ORDER BY name ASC;
+```
+SELECT first_name, last_name
+FROM actors
+WHERE last_name LIKE "%son%"
+ORDER BY first_name ASC;
+```
 
 *Question 27*:
 
