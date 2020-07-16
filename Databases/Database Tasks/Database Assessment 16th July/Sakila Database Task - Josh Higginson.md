@@ -71,7 +71,7 @@ staff, staff_list, store.
 * store, manager, total_sales.
 
 ##### Describe staff:
-* staff_id (PKey), first_name, last_name, address_id(FKey), picture, email, store_id (FKey), active, uesrname, password, last_update.
+* staff_id (PKey), first_name, last_name, address_id(FKey), picture, email, store_id (FKey), active, username, password, last_update.
 
 
 ##### Describe staff_list (View):
@@ -323,29 +323,77 @@ FROM film
 WHERE release_year = 2010;
 ```
 
-> ANSWER.
-
 *Question 21*:
 
-> ANSWER.
+Find the titles of all horror movies.
+
+```
+SELECT title, category
+FROM film_list
+WHERE category = 'Horror';
+```
+
 
 *Question 22*:
 
-> ANSWER.
+Return the full name of the staff member – in a column named full_name – with the ID of 1.
+
+```
+SELECT name
+FROM staff_list
+WHERE id = 1;
+```
 
 *Question 23*:
 
-> ANSWER.
+Retrieve all movies that Fred Costner has appeared in.
 
-*Question 24*:
+```
+SELECT title
+FROM film_list
+WHERE actors LIKE '%Fred Costner%';
+```
 
-> ANSWER.
+*Question 24*: **SKIP RUNING OUT OF TIME**
 
+Find out which location has the most copies of BUCKET BROTHERHOOD.
+> find the film_id of bucket brohood, count number of times in the  inventory filed, sort by store_id, order by most copies of particular film bucket brotherhood, limit 1 or use MAX(). SELECT film_id
+FROM film
+WHERE title = 'BUCKET BROTHERHOOD';
+
+
+```
+SELECT store_id, COUNT(film_id) AS countfilm
+FROM inventory
+WHERE film_id = 103  
+GROUP BY store_id
+ORDER BY countfilm ASC
+LIMIT 1;
+```
 *Question 25*:
 
-> ANSWER.
+How many distinct countries are there?
+
+```
+SELECT DISTINCT COUNT(country)
+FROM country;
+
+```
+
+What are the names of all the languages in the database (sorted alphabetically)?
+
+
+```
+SELECT DISTINCT country
+FROM country
+ORDER BY country ASC;
+
+```
+
 
 *Question 26*:
+
+Return the full names (first and last) of actors with “son” in their last name, ordered by their first name. 
 
 > ANSWER.
 
