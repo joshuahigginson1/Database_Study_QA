@@ -44,7 +44,7 @@ staff, staff_list, store.
 * film_id (PKey), category_id(PKey), last_update.
 
 ##### Describe film_list (View):
-* FID, title, description,category, price, length, rating, actors.
+* FID, title, description, category, price, length, rating, actors.
 
 ##### Describe film_text:
 * film_id (PKey), title (FKey), description.
@@ -160,7 +160,7 @@ Find the 10 shortest movies.
 LIMIT 10 to choose the first 10.
 
 ```
-SELECT title, length  
+SELECT film_id, title, length  
 FROM film  
 ORDER BY length ASC  
 LIMIT 10;
@@ -182,50 +182,146 @@ LIMIT 10;
 
 Find all movies with Deleted Scenes.
 
+> A deleted scene would be a special feature. Films could contain multiple special features, so we need to use wildcards within our LIKE when searching for a pattern.
+
 ```
-
-
+SELECT film_id, title, special_features
+FROM film
+WHERE special_features LIKE "%Deleted Scenes%";
 ```
-
 
 *Question 11*:
 
-> ANSWER.
+Which last names are not repeated?
 
-*Question 12*:
+> Here, we use the DISTINCT keyword.
 
-> ANSWER.
+```
+SELECT DISTINCT last_name
+FROM actor;
+```
 
-*Question 13*:
+*Question 12*
 
-> ANSWER.
+Which last names appear more than once?
+
+> Not massively sure on how this works, so needs some further study.
+
+```
+SELECT last_name, COUNT(last_name)
+FROM actor
+GROUP BY last_name
+HAVING COUNT(last_name) > 1;
+
+```
+
+*Question 13*: **WOULD ACTOR ID SUFFICE? COME BACK LATER**
+
+Which actor has appeared in the most films?
+
+> For this, I would count the appearance of every actor_ID in films.  
+Then, I would sort by highest to lowest, then limit 1.
+
+```
+SELECT actor_id, COUNT(film_id)
+FROM film_actor
+GROUP BY actor_id
+ORDER BY COUNT(film_id) DESC
+LIMIT 1;
+```
 
 *Question 14*:
 
-> ANSWER.
 
-*Question 15*:
+Is ‘Academy Dinosaur’ available for rent from Store 1?
 
-> ANSWER.
+> First, we need to look at the rental inventory of store_id = 1.  
+Then we need to find the film id of academy dinosaur and compare the two.
 
+```
+SELECT *
+FROM inventory
+WHERE store_id = 1 AND film_id = (
+  SELECT film_id
+  FROM film
+  WHERE title = 'Academy Dinosaur'
+);
+
+```
+
+*Question 15*: **MOVING ON DOESNT WORK**
+
+When is ‘Academy Dinosaur’ due?
+
+> Look at rental date, and return date.
+
+SELECT rental_id, rental_date, inventory_id, customer_id, return_date
+FROM rental
+WHERE inventory_id = (
+  SELECT inventory_id
+  FROM inventory
+  WHERE film_id = (
+    SELECT film_id
+    FROM film
+    WHERE title = 'Academy Dinosaur'
+  )  
+);
 
 *Question 16*:
 
-> ANSWER.
+What is that average running time of all the films in the database?
+
+```
+SELECT AVG(length)
+FROM film;
+```
 
 *Question 17*:
 
-> ANSWER.
+What is the average running time of films by category?
+
+```
+SELECT category, AVG(length)
+FROM film_list
+GROUP BY category;
+```
 
 *Question 18*:
 
-> ANSWER.
+How many movies have Robots in them?
+
+> First off, we need to work out HOW to find movies with robots in them!
+This search relies on the assumption that a movie will have a robot within it, if there is the key word 'robot' in the title or description.
+
+```
+SELECT title
+FROM film_text
+WHERE description LIKE "%robot%"
+OR title LIKE "%robot%";
+```
 
 *Question 19*:
 
-> ANSWER.
+Find the movie(s) with the longest runtime.
+
+```
+SELECT title, length
+FROM film
+WHERE length = (
+  SELECT MAX(length)
+  FROM film
+);
+```
 
 *Question 20*:
+
+Count how many movies were released in 2010.
+
+```
+SELECT COUNT(release_year)
+FROM film
+WHERE release_year = 2010;
+```
 
 > ANSWER.
 
