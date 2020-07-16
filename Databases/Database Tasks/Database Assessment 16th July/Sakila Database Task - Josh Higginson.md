@@ -85,32 +85,108 @@ staff, staff_list, store.
 
 *Question 1*:
 
-> ANSWER.
+SELECT all actors from table.
+
+```
+SELECT actor_id, first_name, last_name  
+FROM actor;
+```
 
 *Question 2*:
 
-> ANSWER.
+Find the actor with the first name 'John'.
 
+```
+SELECT actor_id, first_name, last_name  
+FROM actor  
+WHERE first_name='John';
+```
 
 *Question 3*:
 
+Find all actors with the surname “Neeson”.
+
+```
+SELECT actor_id, first_name, last_name  
+FROM actor  
+WHERE last_name='Neeson';
+```
+
 *Question 4*:
+
+Find all actors with Id numbers divisible by 10.
+
+```
+SELECT actor_id, first_name, last_name  
+FROM actor  
+WHERE actor_id % 10 = 0;
+```
 
 *Question 5*:
 
+What is the description of the movie with ID of 100?
+
+```
+SELECT film_id, title, description  
+FROM film  
+WHERE film_id = 100;
+```
+
 *Question 6*:
+
+Find every movie with a rating of “R”.
+
+```
+SELECT film_id, title, rating  
+FROM film  
+WHERE rating = 'R';
+```
 
 *Question 7*:
 
+Find every movie except those with a rating of “R”.
+
+```
+SELECT film_id, title, rating  
+FROM film  
+WHERE rating != 'R';
+```
+
 *Question 8*:
+
+Find the 10 shortest movies.
+
+> Sort by length in ascending order.  
+LIMIT 10 to choose the first 10.
+
+```
+SELECT title, length  
+FROM film  
+ORDER BY length ASC  
+LIMIT 10;
+```
 
 *Question 9*:
 
-> ANSWER.
+Now return only the movie titles.
+
+```
+SELECT title  
+FROM film  
+ORDER BY length ASC  
+LIMIT 10;
+
+```
 
 *Question 10*:
 
-> ANSWER.
+Find all movies with Deleted Scenes.
+
+```
+
+
+```
+
 
 *Question 11*:
 
