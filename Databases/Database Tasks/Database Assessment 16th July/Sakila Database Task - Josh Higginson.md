@@ -390,12 +390,14 @@ ORDER BY country ASC;
 
 ```
 
-
 *Question 26*:
 
-Return the full names (first and last) of actors with “son” in their last name, ordered by their first name. 
+Return the full names (first and last) of actors with “son” in their last name, ordered by their first name.
 
-> ANSWER.
+SELECT
+FROM 
+WHERE name LIKE "%son%"
+ORDER BY name ASC;
 
 *Question 27*:
 
